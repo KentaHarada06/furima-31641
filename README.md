@@ -20,10 +20,10 @@
 
 | Column                 | Type       | Options                        |
 | ---------------------- | ------     | ------------------------------ |
-| item_name              | string     | null: false                    |
-| item_description       | text       | null: false                    |
-| item_category          | integer    | null: false                    |
-| item_state             | integer    | null: false                    |
+| name                   | string     | null: false                    |
+| description            | text       | null: false                    |
+| category_id            | integer    | null: false                    |
+| state_id               | integer    | null: false                    |
 | delivery_charge_burden | integer    | null: false                    |
 | delivery_source        | integer    | null: false                    |
 | delivery_time          | integer    | null: false                    |
