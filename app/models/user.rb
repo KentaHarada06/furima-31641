@@ -6,12 +6,12 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'パスワードは、半角英数字混合で入力してください' }
+         validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'は、半角英数字混合で入力してください' }
          validates :nickname, presence: true
-         validates :kanji_first_name, presence: true, format: { with: VALID_KANJI_NAME_REGEX, message: 'ユーザー本名は、全角（漢字・ひらがな・カタカナ）で入力してください' }
-         validates :kanji_last_name, presence: true, format: { with: VALID_KANJI_NAME_REGEX, message: 'ユーザー本名は、全角（漢字・ひらがな・カタカナ）で入力してください' }
-         validates :kana_first_name, presence: true, format: { with: VALID_KANA_NAME_REGEX, message: 'ユーザー本名のフリガナは、全角（カタカナ）で入力してください' }
-         validates :kana_last_name, presence: true, format: { with: VALID_KANA_NAME_REGEX, message: 'ユーザー本名のフリガナは、全角（カタカナ）で入力してください' }
+         validates :kanji_first_name, presence: true, format: { with: VALID_KANJI_NAME_REGEX, message: 'は、全角（漢字・ひらがな・カタカナ）で入力してください' }
+         validates :kanji_last_name, presence: true, format: { with: VALID_KANJI_NAME_REGEX, message: 'は、全角（漢字・ひらがな・カタカナ）で入力してください' }
+         validates :kana_first_name, presence: true, format: { with: VALID_KANA_NAME_REGEX, message: 'は、全角（カタカナ）で入力してください' }
+         validates :kana_last_name, presence: true, format: { with: VALID_KANA_NAME_REGEX, message: 'は、全角（カタカナ）で入力してください' }
          validates :birthdate, presence: true
 
 end
