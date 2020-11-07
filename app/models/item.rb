@@ -1,5 +1,9 @@
 class Item < ApplicationRecord
+  
   extend ActiveHash::Associations::ActiveRecordExtensions
+  MINIMAM_AMOUNT = 300
+  MAXIMAM_AMOUNT = 9999999
+
   belongs_to :category
   belongs_to :state
   belongs_to :delivery_charge_burden
@@ -9,21 +13,16 @@ class Item < ApplicationRecord
   with_options presence:true do
     validates :name
     validates :description
-    validates :category_id
-    validates :state_id
-    validates :delivery_charge_burden_id
-    validates :delivery_source_id
-    validates :delivery_time_id
-    validates :selling_price
-    validates :user
-  end
-
-  with_options numericality: { other_than: 1 } do
-    validates :category_id
-    validates :state_id
-    validates :delivery_charge_burden_id
-    validates :delivery_source_id
-    validates :delivery_time_id
+    with_options numericality: { other_than: 1 } do
+      validates :category_id
+      validates :state_id
+      validates :delivery_charge_burden_id
+      validates :delivery_source_id
+      validates :delivery_time_id
+    end
+    validates :selling_price, numericality: {greater_than_or_equal_to: MINIMAM_AMOUNT, less_than_or_equal_to: MAXIMAM_AMOUNT}
+    validates :user_id
+    validates :image 
   end
 
   belongs_to :user
