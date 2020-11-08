@@ -1,9 +1,10 @@
 class ItemsController < ApplicationController
+  before_action :move_new_user_session, only: [:new]
+
   def index
   end
 
   def new
-    redirect_to new_user_session_path unless user_signed_in?
     @item = Item.new
   end
 
@@ -17,6 +18,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def move_new_user_session
+    redirect_to new_user_session_path unless user_signed_in? 
+  end
 
   def item_params
     params.require(:item).permit(
