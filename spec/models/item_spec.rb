@@ -45,25 +45,50 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
+      it 'カテゴリーの情報が初期値(id = 1)では登録できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
       it '商品の状態が空では登録できない' do
         @item.state_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("State can't be blank")
+      end
+      it '商品の状態が初期値(id = 1)では登録できない' do
+        @item.state_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("State must be other than 1")
       end
       it '配送料の負担が空では登録できない' do
         @item.delivery_charge_burden_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery charge burden can't be blank")
       end
+      it '配送料の負担が初期値(id = 1)では登録できない' do
+        @item.delivery_charge_burden_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery charge burden must be other than 1")
+      end
       it '発送元の地域が空では登録できない' do
         @item.delivery_source_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery source can't be blank")
       end
+      it '発送元の地域が初期値(id = 1)では登録できない' do
+        @item.delivery_source_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery source must be other than 1")
+      end
       it '発送までの日数が空では登録できない' do
         @item.delivery_time_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery time can't be blank")
+      end
+      it '発送までの日数が初期値(id = 1)では登録できない' do
+        @item.delivery_time_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery time must be other than 1")
       end
       it '販売価格が空では登録できない' do
         @item.selling_price = nil
