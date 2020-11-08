@@ -21,7 +21,6 @@ class Item < ApplicationRecord
       validates :delivery_time_id
     end
     validates :selling_price, numericality: {greater_than_or_equal_to: MINIMAM_AMOUNT, less_than_or_equal_to: MAXIMAM_AMOUNT}
-    validates :user_id
     validates :image 
   end
 
