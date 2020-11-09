@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :item_find_params, only: [:show, :edit, :update, :destroy]
   before_action :move_new_user_session, only: [:new, :edit]
-  before_action :move_root, only: [:edit]
-  before_action :item_find_params, only: [:show, :edit, :update]
+  before_action :move_root, only: [:edit, :destroy]
 
   def index
     @item = Item.all.order(created_at: 'DESC')
@@ -34,6 +34,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+      @item.destroy
+      redirect_to root_path
+  end
+
   private
 
   def item_find_params
@@ -41,7 +46,7 @@ class ItemsController < ApplicationController
   end
 
   def move_root
-    redirect_to root_path unless current_user.id == Item.find(params[:id]).user_id
+    redirect_to root_path unless current_user.id == @item.user_id
   end
 
   def move_new_user_session
