@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :move_new_user_session, only: [:new]
+  before_action :move_new_user_session, only: [:new, :edit]
+  before_action :move_root, only: [:edit]
 
   def index
     @item = Item.all.order(created_at: 'DESC')
@@ -36,6 +37,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def move_root
+    redirect_to root_path unless current_user.id == Item.find(params[:id]).user_id
+  end
 
   def move_new_user_session
     redirect_to new_user_session_path unless user_signed_in?
