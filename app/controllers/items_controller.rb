@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :move_new_user_session, only: [:new]
 
   def index
-    @item = Item.all.order( created_at: "DESC" )
+    @item = Item.all.order(created_at: 'DESC')
   end
 
   def new
@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
   private
 
   def move_new_user_session
-    redirect_to new_user_session_path unless user_signed_in? 
+    redirect_to new_user_session_path unless user_signed_in?
   end
 
   def item_params
