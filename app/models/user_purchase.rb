@@ -1,5 +1,6 @@
 class UserPurchase
   include ActiveModel::Model
+  attr_accessor :token
   VALID_POSTAL_CODE_REGEX = /\A\d{3}[-]\d{4}\z/
   VALID_PHONE_NUMBER_REGEX = /\A\d{1,11}\z/
 
@@ -17,6 +18,7 @@ class UserPurchase
     validates :delivery_city
     validates :delivery_address
     validates :delivery_phone_number, format: { with: VALID_PHONE_NUMBER_REGEX, message: 'にはハイフンは不要で、11桁以内であること' }
+    validates :token
   end
 
   def save
