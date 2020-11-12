@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
   end
 
   def move_root
-    redirect_to root_path unlessif current_user.id == @item.user_id || @item.purchase.nil?
+    redirect_to root_path if current_user.id == @item.user_id || @item.purchase != nil
   end
 
   def item_params
