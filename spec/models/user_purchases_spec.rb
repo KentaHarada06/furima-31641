@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe UserPurchase, type: :model do
   describe '寄付情報の保存' do
     before do
-        @user_purchase = FactoryBot.build(:user_purchase)
-      end
-      context '商品購入処理がうまくいくとき' do
+      @user_purchase = FactoryBot.build(:user_purchase)
+    end
+    context '商品購入処理がうまくいくとき' do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@user_purchase).to be_valid
       end
@@ -24,7 +24,7 @@ RSpec.describe UserPurchase, type: :model do
     end
 
     describe '商品購入処理がうまくいかないとき' do
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @user_purchase.token = nil
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include("Token can't be blank")
@@ -37,7 +37,7 @@ RSpec.describe UserPurchase, type: :model do
       it 'delivery_postal_code_idにハイフンが含まれていないと保存できないこと' do
         @user_purchase.delivery_postal_code_id = '1234567'
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include("Delivery postal code にはハイフンが必要であること")
+        expect(@user_purchase.errors.full_messages).to include('Delivery postal code にはハイフンが必要であること')
       end
       it 'delivery_cityが空だと保存できないこと' do
         @user_purchase.delivery_city = nil
@@ -57,7 +57,7 @@ RSpec.describe UserPurchase, type: :model do
       it 'delivery_phone_numberに12桁以上の値が含まれていると保存できないこと' do
         @user_purchase.delivery_phone_number = '090123456789'
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include("Delivery phone number にはハイフンは不要で、11桁以内であること")
+        expect(@user_purchase.errors.full_messages).to include('Delivery phone number にはハイフンは不要で、11桁以内であること')
       end
     end
   end

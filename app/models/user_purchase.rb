@@ -1,7 +1,7 @@
 class UserPurchase
   include ActiveModel::Model
-  VALID_POSTAL_CODE_REGEX = /\A\d{3}[-]\d{4}\z/
-  VALID_PHONE_NUMBER_REGEX = /\A\d{1,11}\z/
+  VALID_POSTAL_CODE_REGEX = /\A\d{3}-\d{4}\z/.freeze
+  VALID_PHONE_NUMBER_REGEX = /\A\d{1,11}\z/.freeze
 
   attr_accessor :delivery_postal_code_id,
                 :delivery_prefectures_id,
@@ -34,5 +34,4 @@ class UserPurchase
       purchase_id: purchase.id
     )
   end
-
 end
