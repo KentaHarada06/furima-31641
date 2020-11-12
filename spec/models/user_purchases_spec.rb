@@ -9,16 +9,8 @@ RSpec.describe UserPurchase, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@user_purchase).to be_valid
       end
-      it 'delivery_postal_code_idにハイフンが含まれていれば保存できること' do
-        @user_purchase.delivery_postal_code_id = '123-4567'
-        expect(@user_purchase).to be_valid
-      end
       it 'delivery_buildingが空でも保存できること' do
         @user_purchase.delivery_building = nil
-        expect(@user_purchase).to be_valid
-      end
-      it 'delivery_phone_numberに11桁以内の値が含まれていると保存できること' do
-        @user_purchase.delivery_phone_number = '09012345678'
         expect(@user_purchase).to be_valid
       end
     end
@@ -63,6 +55,11 @@ RSpec.describe UserPurchase, type: :model do
         @user_purchase.delivery_phone_number = nil
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include("Delivery phone number can't be blank")
+      end
+      it 'delivery_phone_numberにハイフンが含まれていると保存できないこと' do
+        @user_purchase.delivery_phone_number = '090-1234-5678'
+        @user_purchase.valid?
+        expect(@user_purchase.errors.full_messages).to include("Delivery phone number にはハイフンは不要で、11桁以内であること")
       end
       it 'delivery_phone_numberに12桁以上の値が含まれていると保存できないこと' do
         @user_purchase.delivery_phone_number = '090123456789'
