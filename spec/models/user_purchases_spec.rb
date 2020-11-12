@@ -39,6 +39,16 @@ RSpec.describe UserPurchase, type: :model do
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include('Delivery postal code にはハイフンが必要であること')
       end
+      it 'delivery_prefectures_idが空だと保存できないこと' do
+        @user_purchase.delivery_prefectures_id = nil
+        @user_purchase.valid?
+        expect(@user_purchase.errors.full_messages).to include("Delivery prefectures can't be blank")
+      end
+      it 'delivery_prefectures_idが初期値(id = 1)だと保存できないこと' do
+        @user_purchase.delivery_prefectures_id = 1
+        @user_purchase.valid?
+        expect(@user_purchase.errors.full_messages).to include("Delivery prefectures must be other than 1")
+      end
       it 'delivery_cityが空だと保存できないこと' do
         @user_purchase.delivery_city = nil
         @user_purchase.valid?

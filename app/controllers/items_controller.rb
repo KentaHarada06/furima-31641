@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :item_find_params, only: [:show, :edit, :update, :destroy]
-  before_action :move_new_user_session, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit]
   before_action :move_root, only: [:edit, :destroy]
 
   def index
@@ -47,10 +47,6 @@ class ItemsController < ApplicationController
 
   def move_root
     redirect_to root_path unless current_user.id == @item.user_id || Purchase.find_by(item_id: @item.id).nil?
-  end
-
-  def move_new_user_session
-    redirect_to new_user_session_path unless user_signed_in?
   end
 
   def item_params
