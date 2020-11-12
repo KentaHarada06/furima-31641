@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
   end
 
   def move_root
-    redirect_to root_path unless current_user.id == @item.user_id
+    redirect_to root_path unless current_user.id == @item.user_id || Purchase.find_by(item_id: @item.id) == nil
   end
 
   def move_new_user_session

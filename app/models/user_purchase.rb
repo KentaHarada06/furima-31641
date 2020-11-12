@@ -1,16 +1,17 @@
 class UserPurchase
   include ActiveModel::Model
-  attr_accessor :token
   VALID_POSTAL_CODE_REGEX = /\A\d{3}[-]\d{4}\z/
   VALID_PHONE_NUMBER_REGEX = /\A\d{1,11}\z/
 
   attr_accessor :delivery_postal_code_id,
                 :delivery_prefectures_id,
-                :delivery_city, :delivery_address,
+                :delivery_city,
+                :delivery_address,
                 :delivery_building,
                 :delivery_phone_number,
                 :user_id,
-                :item_id
+                :item_id,
+                :token
 
   with_options presence: true do
     validates :delivery_postal_code_id, format: { with: VALID_POSTAL_CODE_REGEX, message: 'にはハイフンが必要であること' }
