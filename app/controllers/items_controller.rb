@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :item_find_params, only: [:show, :edit, :update, :destroy]
-  before_action :move_new_user_session, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit]
   before_action :move_root, only: [:edit, :destroy]
 
   def index
@@ -35,8 +35,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-      @item.destroy
-      redirect_to root_path
+    @item.destroy
+    redirect_to root_path
   end
 
   private
@@ -46,11 +46,7 @@ class ItemsController < ApplicationController
   end
 
   def move_root
-    redirect_to root_path unless current_user.id == @item.user_id
-  end
-
-  def move_new_user_session
-    redirect_to new_user_session_path unless user_signed_in?
+    redirect_to root_path if current_user.id == @item.user_id || @item.purchase != nil
   end
 
   def item_params
